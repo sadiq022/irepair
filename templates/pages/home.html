@@ -1,0 +1,414 @@
+{% extends "base.html" %}
+{% block title %}iRepair Store – Moradabad{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shop.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+<section class="hero-section" id="home">
+    <div class="left-content">
+        <h1 class="hero-title">Welcome to iRepair Store, Moradabad</h1>
+        <p class="hero-subtitle">Expert mobile repair services for everyone.</p>
+        <button class="cta-button" onclick="scrollToServices()">Get in Touch</button>
+    </div>
+
+    <div class="right-content">
+        <div class="phone-container">
+            <div class="decorative-circle circle-1"></div>
+            <div class="decorative-circle circle-2"></div>
+
+            <div class="phone-image phone-1">
+                <img src="{{ url_for('static', filename='images/phone2.webp') }}">
+            </div>
+
+            <div class="phone-image phone-2">
+                <img src="{{ url_for('static', filename='images/phone3.webp') }}">
+            </div>
+
+            <div class="badge">Trusted by 1000+ customers</div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= SERVICES (FULL LIST RESTORED) ================= -->
+<section class="services-section" id="services">
+    <div class="services-header">
+        <h2 class="services-title">iPhone Repair Services</h2>
+        <p class="services-subtitle">Expert repairs with genuine parts</p>
+    </div>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">📱</div>
+            <h3 class="service-name">Screen Replacement</h3>
+            <p class="service-description">Original quality display replacement</p>
+            <p class="service-price">Starting from ₹2,999</p>
+            <button class="book-button">Book Now</button>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🔋</div>
+            <h3 class="service-name">Battery Replacement</h3>
+            <p class="service-description">Restore full battery capacity</p>
+            <p class="service-price">Starting from ₹1,999</p>
+            <button class="book-button">Book Now</button>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">📷</div>
+            <h3 class="service-name">Camera Repair</h3>
+            <p class="service-description">Front & back camera repair</p>
+            <p class="service-price">Starting from ₹2,499</p>
+            <button class="book-button">Book Now</button>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🔌</div>
+            <h3 class="service-name">Charging Port Repair</h3>
+            <p class="service-description">Fix charging issues</p>
+            <p class="service-price">Starting from ₹1,499</p>
+            <button class="book-button">Book Now</button>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🔊</div>
+            <h3 class="service-name">Speaker & Mic Repair</h3>
+            <p class="service-description">Clear sound restoration</p>
+            <p class="service-price">Starting from ₹1,799</p>
+            <button class="book-button">Book Now</button>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">💧</div>
+            <h3 class="service-name">Water Damage Repair</h3>
+            <p class="service-description">Professional cleaning & repair</p>
+            <p class="service-price">Starting from ₹3,499</p>
+            <button class="book-button">Book Now</button>
+        </div>
+    </div>
+</section>
+
+<section class="featured-section" id="phones">
+
+    <div class="featured-header">
+        <h2 class="featured-title">Featured Phones</h2>
+        <p class="featured-subtitle">Latest phones from our store</p>
+    </div>
+
+    <!-- SLIDER WRAPPER -->
+    <div class="collection-slider-wrapper">
+        <div class="collection-slider" id="collectionSlider">
+
+            {% for product in featured_products %}
+            <div class="product-card">
+
+                <div class="product-image-container">
+                    
+                    {% if product.condition == 'used' %}
+                        <span class="condition-badge used">
+                            Used
+                        </span>
+                    {% else %}
+                        <span class="condition-badge new">
+                            New
+                        </span>
+                    {% endif %}
+
+                    <img
+                        src="{{ product.image }}"
+                        alt="{{ product.name }}">
+                </div>
+
+                <div class="product-details">
+
+                    <!-- BRAND -->
+                    <div class="product-brand">
+                        {{ product.brand }}
+                    </div>
+
+                    <!-- NAME -->
+                    <h3 class="product-name">
+                        {{ product.name }}
+                    </h3>
+
+                    <!-- SPECS (RESTORED ✅) -->
+                    <div class="product-specs">
+
+                        {% if product.condition == 'used' %}
+                            <div class="spec-item">
+                                ♻️ Used · {{ product.used_months }} months old
+                            </div>
+                        {% else %}
+                            <div class="spec-item">
+                                ✨ Brand New
+                            </div>
+                        {% endif %}
+
+                        <div class="spec-item">📱 {{ product.display }}</div>
+                        <div class="spec-item">💾 {{ product.storage }} / {{ product.ram }} RAM</div>
+                        <div class="spec-item">📷 {{ product.camera }}</div>
+
+                    </div>
+
+                    <!-- PRICE -->
+                    <div class="product-price-section">
+                        {% if product.original_price %}
+                        <span class="product-original-price">
+                            ₹{{ "{:,}".format(product.original_price|int) }}
+                        </span>
+                        {% endif %}
+
+                        <span class="product-price">
+                            ₹{{ "{:,}".format(product.price|int) }}
+                        </span>
+                    </div>
+
+                    <!-- BUY BUTTON (IDENTICAL TO SHOP ✅) -->
+                    <button class="buy-btn"
+                        onclick="window.open(
+                        'https://wa.me/918171828762?text={{ 
+                        ('Hi! I am interested in ' ~ product.name ~ 
+                        ' priced at ₹' ~ product.price)|urlencode }}',
+                        '_blank'
+                        )">
+                        Buy Now
+                    </button>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <button
+        class="cta-button"
+        style="display:block; margin:50px auto 0;"
+        onclick="window.location.href='/shop'">
+        View All Products
+    </button>
+
+</section>
+
+
+
+<!-- Testimonials Section -->
+<section class="testimonials-section" id="testimonials">
+    <div class="testimonials-header">
+        <h2 class="testimonials-title">What Our Customers Say</h2>
+        <p class="testimonials-subtitle">Real experiences from real customers</p>
+    </div>
+
+    <div class="testimonials-container">
+        <div class="testimonials-slider" id="testimonialsSlider">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Amazing service! Got my iPhone screen replaced within 30 minutes. The quality is excellent and the price was very reasonable.
+                </div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨</div>
+                    <div class="author-info">
+                        <div class="author-name">Rahul Sharma</div>
+                        <div class="author-role">Verified Customer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Best phone repair shop in Moradabad! They fixed my water-damaged phone when others said it was impossible. Professional staff!
+                </div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <div class="author-name">Priya Gupta</div>
+                        <div class="author-role">Verified Customer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Purchased iPhone 14 Pro from them at a great price. The phone is genuine and came with warranty. Highly recommended!
+                </div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨</div>
+                    <div class="author-info">
+                        <div class="author-name">Amit Kumar</div>
+                        <div class="author-role">Verified Customer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Fast and reliable service. Got my battery replaced and the phone feels brand new. Fair pricing and excellent customer service!
+                </div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <div class="author-name">Neha Singh</div>
+                        <div class="author-role">Verified Customer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Excellent experience! They diagnosed my phone issue quickly and fixed it at a reasonable cost. Very transparent with pricing!
+                </div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨</div>
+                    <div class="author-info">
+                        <div class="author-name">Vikram Patel</div>
+                        <div class="author-role">Verified Customer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 6 -->
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    My charging port wasn't working and they fixed it perfectly. Quick turnaround time and great service quality!
+                </div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <div class="author-name">Anjali Verma</div>
+                        <div class="author-role">Verified Customer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 7 -->
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Bought iPhone 13 for my wife. Got an amazing deal with genuine warranty. Staff was helpful in explaining all features!
+                </div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨</div>
+                    <div class="author-info">
+                        <div class="author-name">Sandeep Yadav</div>
+                        <div class="author-role">Verified Customer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 8 -->
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    Camera repair was done perfectly. Now it works like new. Very satisfied with the quality of work and customer care!
+                </div>
+                <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩</div>
+                    <div class="author-info">
+                        <div class="author-name">Ritu Malhotra</div>
+                        <div class="author-role">Verified Customer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="slider-controls">
+            <button class="slider-button" id="prevButton">←</button>
+            <button class="slider-button" id="nextButton">→</button>
+        </div>
+
+        <!-- Slider Dots -->
+        <div class="slider-dots" id="sliderDots"></div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-section" id="contact">
+    <div class="contact-header">
+        <h2 class="contact-title">Get In Touch</h2>
+        <p class="contact-subtitle">We'd love to hear from you. Send us a message!</p>
+    </div>
+
+    <div class="contact-container">
+        <form class="contact-form" id="contactForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="repair">Repair Service</option>
+                        <option value="purchase">Phone Purchase</option>
+                        <option value="inquiry">General Inquiry</option>
+                        <option value="complaint">Complaint</option>
+                        <option value="feedback">Feedback</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">Send Message</button>
+        </form>
+
+        <div class="contact-info">
+            <div class="contact-info-item">
+                <div class="contact-icon">📞</div>
+                <div class="contact-info-text">
+                    <div class="contact-info-label">Call Us</div>
+                    <div class="contact-info-value">+91-XXXXXXXXXX</div>
+                </div>
+            </div>
+
+            <div class="contact-info-item">
+                <div class="contact-icon">✉️</div>
+                <div class="contact-info-text">
+                    <div class="contact-info-label">Email Us</div>
+                    <div class="contact-info-value">info@irepairstore.com</div>
+                </div>
+            </div>
+
+            <div class="contact-info-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-info-text">
+                    <div class="contact-info-label">Visit Us</div>
+                    <div class="contact-info-value">Civil Lines, Moradabad</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

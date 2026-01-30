@@ -1,0 +1,93 @@
+/* HEADER ACTIONS */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ================= ADMIN ADD PRODUCT BUTTON ================= */
+.admin-header .cta-button {
+    background-color: #000;
+    color: #fff;
+    padding: 16px 36px;
+    font-size: 15px;
+    border: none;
+}
+
+/* Hover state (matches other CTAs) */
+.admin-header .cta-button:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* ADMIN BUTTONS INSIDE PRODUCT CARD */
+.admin-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.admin-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+}
+
+.edit-btn {
+    background-color: #000;
+    color: #fff;
+}
+
+.delete-btn {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+/* FORM PAGE */
+.admin-form-section {
+    padding: 60px 30px;
+}
+
+.admin-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: grid;
+    gap: 15px;
+}
+
+.admin-form input {
+    padding: 14px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    font-size: 14px;
+}
+
+/* ADMIN PRODUCT IMAGE SIZE FIX */
+.admin-section .product-image-container,
+.products-section .product-image-container {
+    height: 220px;
+}
+
+@media (min-width: 768px) {
+    .admin-section .product-image-container {
+        height: 200px;
+    }
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.admin-header .cta-button {
+    padding: 16px 36px;      /* matches other CTAs */
+    font-size: 15px;
+    line-height: 1;
+    white-space: nowrap;
+}

@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% block title %}About Us – iRepair Store Moradabad{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= ABOUT HERO ================= -->
+<section class="about-hero">
+    <h1 class="about-hero-title">About iRepair Store</h1>
+    <p class="about-hero-subtitle">
+        Your trusted partner for mobile repairs and sales in Moradabad.
+        Quality service, genuine parts, and customer satisfaction since 2018.
+    </p>
+</section>
+
+<!-- ================= OUR STORY ================= -->
+<section class="story-section">
+    <div class="section-container">
+        <h2 class="section-title">Our Story</h2>
+
+        <div class="story-content">
+            <div class="story-text">
+                <p>
+                    Founded in 2018, iRepair Store began with a simple mission:
+                    to provide honest, reliable, and affordable mobile phone repair
+                    services to the people of Moradabad.
+                </p>
+                <p>
+                    What started as a small repair shop has grown into the most
+                    trusted mobile service center in the region.
+                </p>
+                <p>
+                    Today, we proudly serve thousands of customers with certified
+                    technicians and genuine parts.
+                </p>
+            </div>
+
+            <div class="story-image">
+                <img src="{{ url_for('static', filename='images/phone4.webp') }}" alt="iRepair Store Interior">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">5000+</div>
+            <div class="stat-label">Devices Repaired</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">2000+</div>
+            <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">4.9★</div>
+            <div class="stat-label">Customer Rating</div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+<section class="team-section">
+    <div class="section-container">
+        <h2 class="section-title">Meet Our Team</h2>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-image">👨‍💼</div>
+                <div class="team-info">
+                    <h3 class="team-name">Rajesh Kumar</h3>
+                    <p class="team-role">Founder & CEO</p>
+                    <p class="team-description">
+                        10+ years of experience in mobile technology.
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">👨‍🔧</div>
+                <div class="team-info">
+                    <h3 class="team-name">Ankit Sharma</h3>
+                    <p class="team-role">Lead Technician</p>
+                    <p class="team-description">
+                        Certified Apple technician for all iPhone models.
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">👩‍💼</div>
+                <div class="team-info">
+                    <h3 class="team-name">Priya Singh</h3>
+                    <p class="team-role">Customer Relations Manager</p>
+                    <p class="team-description">
+                        Ensuring excellent customer experience.
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">👨‍🔧</div>
+                <div class="team-info">
+                    <h3 class="team-name">Mohit Gupta</h3>
+                    <p class="team-role">Senior Technician</p>
+                    <p class="team-description">
+                        Specialist in complex repairs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= VALUES ================= -->
+<section class="values-section">
+    <div class="section-container">
+        <h2 class="section-title">Our Values</h2>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">✨</div>
+                <h3 class="value-title">Quality First</h3>
+                <p class="value-description">Only genuine parts used.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3 class="value-title">Customer Trust</h3>
+                <p class="value-description">Transparent & honest service.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">⚡</div>
+                <h3 class="value-title">Fast Service</h3>
+                <p class="value-description">Most repairs within an hour.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= LOCATION ================= -->
+<section class="location-section">
+    <div class="section-container">
+        <h2 class="section-title">Visit Our Store</h2>
+
+        <div class="location-content">
+            <div class="location-info">
+                <div class="location-item">
+                    <div class="location-icon">📍</div>
+                    <div class="location-value">
+                        New Super Bazaar Basement,<br>
+                        Moradabad, Uttar Pradesh – 244001
+                    </div>
+                </div>
+
+                <div class="location-item">
+                    <div class="location-icon">📞</div>
+                    <div class="location-value">
+                        +91-XXXXXXXXXX
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6325.938078243154!2d78.7704978!3d28.8330669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390afbc021b1d6fb%3A0xec16a2fdf20675a5!2sNew%20Super%20Bazaar%20Basement!5e1!3m2!1sen!2sde!4v1768075791720!5m2!1sen!2sde"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<!-- <section class="cta-section">
+    <h2 class="cta-title">Ready to Experience Our Service?</h2>
+    <p class="cta-subtitle">Visit us today or get in touch</p>
+    <button class="cta-button" onclick="window.location.href='{{ url_for('home') }}#contact'">
+        Contact Us Now
+    </button>
+</section> -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/about.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Admin – Manage Products{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shop.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= ADMIN HERO (MATCH ABOUT / SHOP) ================= -->
+<section class="about-hero">
+    <h1 class="about-hero-title">Manage Products</h1>
+    <p class="about-hero-subtitle">
+        Add, edit or remove products from your store
+    </p>
+</section>
+
+<!-- ================= ADMIN PRODUCTS ================= -->
+<section class="products-section">
+    <div class="section-container">
+
+        <div class="admin-header">
+            <h2 class="section-title">All Products</h2>
+            <a href="{{ url_for('admin_add_product') }}" class="cta-button">
+                + Add Product
+            </a>
+        </div>
+
+        <div class="products-grid">
+
+            {% for product in products %}
+            <div class="product-card">
+
+                <!-- IMAGE -->
+                <div class="product-image-container">
+                    <img
+                        src="{{ product.image }}" alt="{{ product.name }}"
+                        alt="{{ product.name }}">
+                </div>
+
+                <!-- DETAILS -->
+                <div class="product-details">
+
+                    <div class="product-brand">
+                        {{ product.brand }}
+                    </div>
+
+                    <h3 class="product-name">
+                        {{ product.name }}
+                    </h3>
+
+                    <div class="product-price-section">
+                        {% if product.original_price %}
+                        <span class="product-original-price">
+                            ₹{{ "{:,}".format(product.original_price|int) }}
+                        </span>
+                        {% endif %}
+
+                        <span class="product-price">
+                            ₹{{ "{:,}".format(product.price|int) }}
+                        </span>
+                    </div>
+
+                    <!-- ADMIN ACTIONS -->
+                    <div class="admin-actions">
+                        <a
+                            href="{{ url_for('admin_edit_product', product_id=product.id) }}"
+                            class="admin-btn edit-btn">
+                            Edit
+                        </a>
+
+                        <a
+                            href="{{ url_for('admin_delete_product', product_id=product.id) }}"
+                            class="admin-btn delete-btn"
+                            onclick="return confirm('Delete this product?')">
+                            Delete
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

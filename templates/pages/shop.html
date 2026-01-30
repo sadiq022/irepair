@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Shop – iRepair Store{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shop.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- SHOP HERO (STYLE MATCHES ABOUT PAGE VIA CSS) -->
+<section class="shop-hero">
+    <h1 class="shop-hero-title">Our Collection</h1>
+    <p class="shop-hero-subtitle">
+        Browse through our premium selection of smartphones
+    </p>
+</section>
+
+<!-- FILTER SECTION -->
+<section class="filter-section">
+    <div class="filter-container">
+
+        <form method="get" class="filter-row">
+
+            <input
+                type="text"
+                name="search"
+                class="filter-input"
+                placeholder="Search by name or brand"
+                value="{{ request.args.get('search', '') }}">
+
+            <select name="brand" class="filter-input">
+                <option value="">All Brands</option>
+                {% for b in ['Apple','Samsung','OnePlus','Xiaomi','Vivo','Oppo'] %}
+                    <option value="{{ b }}"
+                        {% if request.args.get('brand') == b %}selected{% endif %}>
+                        {{ b }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <select name="price" class="filter-input">
+                <option value="">All Prices</option>
+                <option value="0-20000">Under ₹20,000</option>
+                <option value="20000-40000">₹20k – ₹40k</option>
+                <option value="40000-60000">₹40k – ₹60k</option>
+                <option value="60000-999999">Above ₹60k</option>
+            </select>
+
+            <button type="submit" class="filter-btn apply-btn">Apply</button>
+            <a href="{{ url_for('shop') }}" class="filter-btn reset-btn">Reset</a>
+
+        </form>
+
+    </div>
+</section>
+
+<!-- RESULTS INFO -->
+<div class="results-info">
+    <span class="results-count">
+        Showing {{ products|length }} products
+    </span>
+</div>
+
+<!-- PRODUCTS GRID -->
+<section class="products-section">
+    <div class="products-grid">
+
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image-container">
+
+                <!-- CONDITION BADGE -->
+                {% if product.condition == 'used' %}
+                    <span class="condition-badge used">
+                        Used
+                    </span>
+                {% else %}
+                    <span class="condition-badge new">
+                        New
+                    </span>
+                {% endif %}
+
+                <img
+                    src="{{ product.image }}"
+                    alt="{{ product.name }}">
+            </div>
+
+            <div class="product-details">
+
+                <!-- BRAND -->
+                <div class="product-brand">
+                    {{ product.brand }}
+                </div>
+
+                <!-- NAME -->
+                <h3 class="product-name">
+                    {{ product.name }}
+                </h3>
+
+                <!-- SPECS -->
+                <div class="product-specs">
+
+                    {% if product.condition == 'used' %}
+                        <div class="spec-item">
+                            ♻️ Used · {{ product.used_months }} months old
+                        </div>
+                    {% else %}
+                        <div class="spec-item">
+                            ✨ Brand New
+                        </div>
+                    {% endif %}
+
+                    <div class="spec-item">📱 {{ product.display }}</div>
+                    <div class="spec-item">💾 {{ product.storage }} / {{ product.ram }} RAM</div>
+                    <div class="spec-item">📷 {{ product.camera }}</div>
+
+                </div>
+
+                <!-- PRICE -->
+                <div class="product-price-section">
+                    {% if product.original_price %}
+                        <span class="product-original-price">
+                            ₹{{ "{:,}".format(product.original_price|int) }}
+                        </span>
+                    {% endif %}
+
+                    <span class="product-price">
+                        ₹{{ "{:,}".format(product.price|int) }}
+                    </span>
+                </div>
+
+                <!-- ACTION -->
+                <button class="buy-btn"
+                    onclick="window.open(
+                    'https://wa.me/91XXXXXXXXXX?text={{ 
+                    ('Hi! I am interested in ' ~ product.name ~ 
+                    ' priced at ₹' ~ product.price)|urlencode }}',
+                    '_blank'
+                    )">
+                    Buy Now
+                </button>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

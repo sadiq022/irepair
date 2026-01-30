@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Admin – Product Form{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="section-container admin-form-section">
+
+    <h2 class="section-title">
+        {{ "Edit Product" if product else "Add Product" }}
+    </h2>
+
+    <form method="post" enctype="multipart/form-data" class="admin-form">
+
+        <!-- Preserve existing image on edit -->
+        {% if product and product.image %}
+            <input type="hidden" name="existing_image" value="{{ product.image }}">
+        {% endif %}
+
+        <div class="form-group">
+            <label>Brand *</label>
+            <input type="text" name="brand" required
+                   placeholder="e.g. Apple"
+                   value="{{ product.brand if product }}">
+        </div>
+
+        <div class="form-group">
+            <label>Product Name *</label>
+            <input type="text" name="name" required
+                   placeholder="e.g. iPhone 14 Pro"
+                   value="{{ product.name if product }}">
+        </div>
+
+        <div class="form-group">
+            <label>Condition *</label>
+
+            <div class="radio-group">
+                <label>
+                    <input
+                        type="radio"
+                        name="condition"
+                        value="new"
+                        {% if not product or product.condition == 'new' %}checked{% endif %}
+                    >
+                    New
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="condition"
+                        value="used"
+                        {% if product and product.condition == 'used' %}checked{% endif %}
+                    >
+                    Used
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Used Duration (Months)</label>
+            <input
+                type="number"
+                name="used_months"
+                min="1"
+                placeholder="e.g. 6"
+                value="{{ product.used_months if product and product.used_months }}"
+            >
+        </div>
+
+        <div class="form-group">
+            <label>Display</label>
+            <input type="text" name="display"
+                   placeholder='e.g. 6.1" Super Retina XDR'
+                   value="{{ product.display if product }}">
+        </div>
+
+        <div class="form-group">
+            <label>Storage</label>
+            <input type="text" name="storage"
+                   placeholder="e.g. 128GB"
+                   value="{{ product.storage if product }}">
+        </div>
+
+        <div class="form-group">
+            <label>RAM</label>
+            <input type="text" name="ram"
+                   placeholder="e.g. 6GB"
+                   value="{{ product.ram if product }}">
+        </div>
+
+        <div class="form-group">
+            <label>Camera</label>
+            <input type="text" name="camera"
+                   placeholder="e.g. 48MP"
+                   value="{{ product.camera if product }}">
+        </div>
+
+        <div class="form-group">
+            <label>Price (₹) *</label>
+            <input type="number" name="price" required
+                   placeholder="e.g. 89999"
+                   value="{{ product.price if product }}">
+        </div>
+
+        <div class="form-group">
+            <label>Original Price (₹)</label>
+            <input type="number" name="original_price"
+                   placeholder="e.g. 99999"
+                   value="{{ product.original_price if product }}">
+        </div>
+
+        <div class="form-group">
+            <label>Product Image {{ "*" if not product }}</label>
+            <input type="file" name="image" accept="image/*">
+
+            {% if product and product.image %}
+                <div style="margin-top:12px;">
+                    <small>Current Image:</small><br>
+                    <img src="{{ product.image }}"
+                         style="width:120px;border-radius:10px;margin-top:6px;">
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="cta-button">
+            Save Product
+        </button>
+
+    </form>
+
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const radios = document.querySelectorAll('input[name="condition"]');
+    const usedField = document.querySelector('input[name="used_months"]').closest('.form-group');
+
+    function toggleUsedField() {
+        const selected = document.querySelector('input[name="condition"]:checked').value;
+        usedField.style.display = selected === 'used' ? 'block' : 'none';
+    }
+
+    radios.forEach(r => r.addEventListener("change", toggleUsedField));
+    toggleUsedField();
+});
+</script>
+
+{% endblock %}
