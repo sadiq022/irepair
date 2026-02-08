@@ -22,11 +22,11 @@
         <div class="footer-section">
             <h3 class="footer-title">Quick Links</h3>
             <ul class="footer-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#phones">Shop</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('shop') }}">Shop</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
             </ul>
         </div>
 
@@ -34,11 +34,11 @@
         <div class="footer-section">
             <h3 class="footer-title">Services</h3>
             <ul class="footer-links">
-                <li><a href="#services">Screen Repair</a></li>
-                <li><a href="#services">Battery Replacement</a></li>
-                <li><a href="#services">Camera Repair</a></li>
-                <li><a href="#services">Water Damage</a></li>
-                <li><a href="#services">Data Recovery</a></li>
+                <li><a href="{{ url_for('home') }}#services">Screen Repair</a></li>
+                <li><a href="{{ url_for('home') }}#services">Battery Replacement</a></li>
+                <li><a href="{{ url_for('home') }}#services">Camera Repair</a></li>
+                <li><a href="{{ url_for('home') }}#services">Water Damage</a></li>
+                <li><a href="{{ url_for('home') }}#services">Data Recovery</a></li>
             </ul>
         </div>
 
@@ -48,11 +48,14 @@
             <div class="footer-address">
                 <div class="footer-address-item">
                     <span>📍</span>
-                    <span>Shop No. 12, Civil Lines,<br>Moradabad, Uttar Pradesh<br>244001</span>
+                    <span>Shop No. 7, New Super Market, Below ICIC Bank<br>Moradabad, Uttar Pradesh<br>244001</span>
                 </div>
                 <div class="footer-address-item">
                     <span>📞</span>
-                    <span>+91-XXXXXXXXXX<br>+91-YYYYYYYYYY</span>
+                    <span>
+                        <a href="tel:+919012639720" style="color: white; text-decoration: none;">+91-9012639720</a><br>
+                        <a href="tel:+918171828762" style="color: white; text-decoration: none;">+91-8171828762</a>
+                    </span>
                 </div>
                 <div class="footer-address-item">
                     <span>✉️</span>
@@ -60,7 +63,7 @@
                 </div>
                 <div class="footer-address-item">
                     <span>🕒</span>
-                    <span>Mon - Sat: 10:00 AM - 8:00 PM<br>Sunday: Closed</span>
+                    <span>Mon - Sun: 10:00 AM - 10:00 PM<br></span>
                 </div>
             </div>
         </div>
@@ -69,6 +72,6 @@
     <!-- Footer Bottom -->
     <div class="footer-bottom">
         <p>&copy; 2025 iRepair Store. All rights reserved.</p>
-        <p>Designed & Developed by <a href="#" target="_blank">Nexa Solutions</a></p>
+        <p>Designed & Developed by <a href="https://nexa-solutions.in" target="_blank">Nexa Solutions</a></p>
     </div>
 </footer>

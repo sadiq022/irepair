@@ -1,20 +1,38 @@
 // Mobile menu toggle
+// const menuToggle = document.getElementById('menuToggle');
+// const navMenu = document.getElementById('navMenu');
+
+// menuToggle.addEventListener('click', () => {
+//     menuToggle.classList.toggle('active');
+//     navMenu.classList.toggle('active');
+// });
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
 
 // Close menu when clicking on a link
+// const navLinks = document.querySelectorAll('.nav-menu a');
+// navLinks.forEach(link => {
+//     link.addEventListener('click', () => {
+//         menuToggle.classList.remove('active');
+//         navMenu.classList.remove('active');
+//     });
+// });
 const navLinks = document.querySelectorAll('.nav-menu a');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        navMenu.classList.remove('active');
+if (menuToggle && navMenu) {
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
     });
-});
+}
 
 // Scroll to services function
 function scrollToServices() {
@@ -125,22 +143,48 @@ testimonialsContainer.addEventListener('mouseleave', () => {
     startAutoSlide();
 });
 
-// Contact Form Submission
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-    
-    // Here you would typically send this data to a server
-    alert(`Thank you ${name}! Your message has been received. We'll get back to you soon at ${email}`);
-    
-    // Reset form
-    contactForm.reset();
+// Contact Form Submission → WhatsApp Redirect
+document.addEventListener("DOMContentLoaded", function () {
+    const contactForm = document.getElementById("contactForm");
+
+    if (!contactForm) return; // prevents errors on pages without the form
+
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value.trim();
+
+        const whatsappNumber = "918171828762";
+
+        const subjectMap = {
+            repair: "Repair Service",
+            purchase: "Phone Purchase",
+            inquiry: "General Inquiry",
+            complaint: "Complaint",
+            feedback: "Feedback"
+        };
+
+        const readableSubject = subjectMap[subject] || subject;
+
+        const whatsappMessage =
+            `📩 *New Contact Form Message*\n\n` +
+            `👤 Name: ${name}\n` +
+            `📧 Email: ${email}\n` +
+            `📞 Phone: ${phone}\n` +
+            `📌 Subject: ${readableSubject}\n\n` +
+            `💬 Message:\n${message}`;
+
+        const whatsappURL =
+            `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+        window.open(whatsappURL, "_blank");
+
+        contactForm.reset();
+    });
 });
 
 // Parallax effect for desktop only
