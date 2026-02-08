@@ -39,15 +39,6 @@ function scrollToServices() {
     document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Book button functionality
-const bookButtons = document.querySelectorAll('.book-button');
-bookButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const serviceName = this.parentElement.querySelector('.service-name').textContent;
-        alert(`Booking ${serviceName}... Contact us at: +91-XXXXXXXXXX`);
-    });
-});
-
 // Phone "Know More" button functionality
 const knowMoreButtons = document.querySelectorAll('.know-more-button');
 knowMoreButtons.forEach(button => {
